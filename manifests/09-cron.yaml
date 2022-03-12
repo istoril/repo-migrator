@@ -1,0 +1,48 @@
+# create CronJob
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: remo-migrator-cron
+  namespace: remo-migrator
+  labels:
+    app: remo-migrator-cron
+spec:
+  concurrencyPolicy: Forbid
+  # run every 2 hours
+  schedule: "7 0-2/2,4-23/2 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 1200
+      ttlSecondsAfterFinished: 604800
+      template:
+        spec:
+          nodeSelector:
+            gitlab-migrate: allow
+          containers:
+            - name: gmu-cron
+              image: docker.repo.com/remo-migrator:1.0.0
+              imagePullPolicy: Always
+              env:
+                - name: GIT_MIGRATION_LOG_LEVEL
+                  value: DEBUG
+              resources:
+                requests:
+                  memory: 128Mi
+                  cpu: "250m"
+                limits:
+                  memory: 512Mi
+                  cpu: "500m"
+              envFrom:
+                - secretRef:
+                    name: gmu-sshcert
+              volumeMounts:
+                - name: repo-migrate-yaml
+                  mountPath: /home/runuser/conf
+          restartPolicy: Never
+          volumes:
+            - name: repo-migrate-yaml
+              configMap:
+                name: repo-migrate-yaml

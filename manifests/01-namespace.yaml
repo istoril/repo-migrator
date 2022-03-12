@@ -1,0 +1,7 @@
+# create Namespace
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: remo-migrator
+  labels:
+    app: remo-migrator-cron

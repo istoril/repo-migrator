@@ -1,0 +1,8 @@
+atlassian-python-api
+jsonschema
+pyaml
+python-dateutil
+python-gitlab
+python-jenkins
+requests
+urllib3

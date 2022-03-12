@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: repo-migrate-yaml
+  namespace: remo-migrator
+  labels:
+    app: remo-migrator-cron
+data:
+  repo.migrate-k8s.yaml: |
+    # общие настройки
+    sGitlabApiUrl: 'https://gl.example.com/' # УРЛ API гитлаба
+    sGitlabRepoUrl: 'ssh://git@gl.example.com:22/' # УРЛ для репозиториев гитлаба - по умолчанию берется как до API
+    sBitbucketUrl: 'https://bb.example.com/' # УРЛ битбакета
+    sLocalRootPath: '~/_git/_migration/'
+    sUser: 'someuser' # логин
+    # флаги по умолчанию
+    bDefaultDeleteBBRepo: False
+    bDefaultMirroring: False
+    bDefaultGitlabReadonly: False
+    bDefaultCloning: True
+    bDefaultClear: False
+    bDefaultDuplicateMRs: True
+    bDefaultChangeJenkinsJobs: False
+    bDefaultBackupJenkinsJobs: False
+
+    # репозитории
+    repos:
+     - sGitlabGroup: 'somegroup'
+       sGitlabProject: 'someproject'
+       sBitbucketProject: 'PRJ'
+       sBitbucketPrefix: 'some.prefix'

@@ -1,0 +1,35 @@
+# pod for testing
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gmu-pod
+  namespace: remo-migrator
+  labels:
+    app: remo-migrator-cron
+spec:
+  containers:
+    - name: gmu-cont
+      image: docker.repo.com/remo-migrator:1.0.0
+      imagePullPolicy: Always
+      env:
+        - name: GIT_MIGRATION_LOG_LEVEL
+          value: DEBUG
+      resources:
+        requests:
+          memory: 128Mi
+          cpu: "250m"
+        limits:
+          memory: 512Mi
+          cpu: "500m"
+      envFrom:
+        - secretRef:
+            name: gmu-sshcert
+      volumeMounts:
+        - name: repo-migrate-yaml
+          mountPath: /home/runuser/conf
+      command: ["/bin/sh"]
+      args: ["-c", "trap : TERM INT; sleep 9999999999d & wait"]
+  volumes:
+    - name: repo-migrate-yaml
+      configMap:
+        name: repo-migrate-yaml

@@ -1,0 +1,21 @@
+# main properties
+sGitlabApiUrl: 'https://gitlab.example.com/'
+sGitlabRepoUrl: 'ssh://git@gitlab.example.com:22/'
+sBitbucketUrl: 'https://bitbucket.example.com/'
+sLocalRootPath: '~/_git/_migration/'
+sUser: 'username'
+# default flags
+bDefaultDeleteBBRepo: False
+bDefaultMirroring: False
+bDefaultGitlabReadonly: True
+bDefaultCloning: False
+bDefaultClear: False
+bDefaultDuplicateMRs: False
+bDefaultChangeJenkinsJobs: False
+bDefaultBackupJenkinsJobs: True
+
+# repos
+repos:
+  - sGitlabGroup: 'SomeGroup' # группа в гитлабе, из которой получить список репозиториев
+    sBitbucketProject: 'SomeProject' # проект в битбакете
+    sBitbucketPrefix: 'some.name.prefix' # префикс к имени репозитория в битбакете

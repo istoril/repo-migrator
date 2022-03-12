@@ -1,0 +1,58 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "sGitlabApiUrl", "sGitlabRepoUrl", "sBitbucketUrl", "sLocalRootPath"
+    ],
+    "anyOf": [
+        {"required": ["sUser"]},
+        {"required": ["sGitlabUser", "sBBUser"]}
+    ],
+    "properties": {
+        "sGitlabApiUrl": {"type": "string"},
+        "sGitlabRepoUrl": {"type": "string"},
+        "sBitbucketUrl": {"type": "string"},
+        "sLocalRootPath": {"type": "string"},
+        "sUser": {"type": "string"},
+        "sGitlabUser": {"type": "string"},
+        "sBBUser": {"type": "string"},
+        "sJenkinsUser": {"type": "string"},
+        "sJenkinsUrl": {"type": "string"},
+        "sJenkinsJobsBkpPath": {"type": "string"},
+        "bDefaultDeleteBBRepo": {"type": "boolean"},
+        "bDefaultMirroring": {"type": "boolean"},
+        "bDefaultGitlabReadonly": {"type": "boolean"},
+        "bDefaultCloning": {"type": "boolean"},
+        "bDefaultClear": {"type": "boolean"},
+        "bDefaultDuplicateMRs": {"type": "boolean"},
+        "bDefaultChangeJenkinsJobs": {"type": "boolean"},
+        "bDefaultBackupJenkinsJobs": {"type": "boolean"},
+        "sDefaultWebhookName": {"type": "string"},
+        "sDefaultWebhookUrl": {"type": "string"},
+        "repos": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["sBitbucketProject", "sBitbucketPrefix", "sGitlabGroup"],
+                "properties": {
+                    "sGitlabGroup": {"type": "string"},
+                    "sGitlabProject": {"type": "string"},
+                    "sBitbucketProject": {"type": "string"},
+                    "sBitbucketPrefix": {"type": "string"},
+                    "sWebhookName": {"type": "string"},
+                    "sWebhookUrl": {"type": "string"},
+                    "sWebhookUrlParameter": {"type": "string"},
+                    "bMakeGitlabRepoReadonly": {"type": "boolean"},
+                    "bMirroring": {"type": "boolean"},
+                    "bClone": {"type": "boolean"},
+                    "bClear": {"type": "boolean"},
+                    "bDuplicateMRs": {"type": "boolean"},
+                    "bDeleteBBRepo": {"type": "boolean"},
+                    "bChangeJenkinsJobs": {"type": "boolean"},
+                    "bBackupJenkinsJobs": {"type": "boolean"}
+                }
+            }
+        }
+    }
+}
