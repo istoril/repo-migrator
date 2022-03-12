@@ -1,4 +1,4 @@
-# Opn.Tech.Python.GitLab-Migrate
+# Repo Migrator
 
 Utility for repositories migration from Gitlab to Bitbucket
 
